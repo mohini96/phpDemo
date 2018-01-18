@@ -1,0 +1,205 @@
+  <script src="Datatables.min"></script>
+        <script src="datatables.min.js"></script>
+        <script>
+          $(document).ready(function(){
+              $('#myTable').DataTable();
+          });
+        </script>
+
+
+        Task: PHP
+        workdone:
+        1. stored procedure
+        2. Crud with prepared
+        Status : in progress
+        Issues : None
+
+
+
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+
+	$(document).keypress(function(e) {
+		if(e.which == 13) {
+			var val1=$("#txt1").val();
+			var val2=$("#txt2").val();
+			if(val1!=""){
+				//adding entered text
+				$("#lstBox1").append($('<option>',{value:val1,text:val1}));
+				$("#txt1").val("");
+			}
+			if(val2!=""){
+				//adding entered text
+				$("#lstBox2").append($('<option>',{value:val2,text:val2}));
+				$("#txt2").val("");
+			}
+		}
+		if(e.key ==="Delete") {
+		        if($("#lstBox1 option:selected")){
+				$("#lstBox1 option:selected").remove();
+			}
+			if($("#lstBox2 option:selected")){
+				$("#lstBox2 option:selected").remove();
+			}
+		}
+	});
+
+	//moving single item from left to right
+	$("#singleRight").click(function(){
+		var selectOption=$("#lstBox1 option:selected");
+		// Display alert when move option without select
+		if(selectOption.length==0){
+			alert("First elect option to move");
+		}
+		//removing selected option
+		selectOption.remove();
+		//adding selected option
+		$("#lstBox2").append(selectOption);
+	});
+
+	//moving multiple item from left to right
+	$("#allRight").click(function(){
+		var options=$("#lstBox1 option");
+		// Display alert when no option to move
+		if(options.length==0){
+			alert("Nothing to move");
+		}
+		//removing selected option
+		options.remove();
+		//adding selected option
+		$("#lstBox2").append(options);
+	});
+
+	//moving single item from right to left
+	$("#singleLeft").click(function(){
+		var selectOption=$("#lstBox2 option:selected");
+		// Display alert when move option without select
+		if(selectOption.length==0){
+			alert("First elect option to move");
+		}
+		//removing selected option
+		selectOption.remove();
+		//adding selected option
+		$("#lstBox1").append(selectOption);
+	});
+
+	//moving multiple item from right to left
+	$("#allLeft").click(function(){
+		var options=$("#lstBox2 option");
+		// Display alert when no option to move
+		if(options.length==0){
+			alert("Nothing to move");
+		}
+		//removing selected option
+		options.remove();
+		//adding selected option
+		$("#lstBox1").append(options);
+	});
+
+	//shorting opration start
+	// move option up side
+	$("#moveUp").click(function(){
+		//check option selected or not
+		var option=$("#lstBox2 option:selected");
+		if(option.length==1){
+			//check position of element
+			if(prevVal=option.prev().val()!=null){
+				//move element
+				option.insertBefore(option.prev());
+			}else{
+				//display alert for no move
+				alert('no more move for this element');
+			}
+
+		}else{
+			alert('select single element to move');
+		}
+	});
+
+	// move option up side
+	$("#moveDown").click(function(){
+		//check option selected or not
+		var option=$("#lstBox2 option:selected");
+		if(option.length==1){
+			//check position of element
+			if(option.next().val()!=null){
+				//move element
+				option.insertAfter(option.next());
+			}else{
+				alert('no more move for this element');
+			}
+		}else{
+			alert('select single element to move');
+		}
+	});
+
+});
+</script>
+<style>
+div{
+	width:10%;
+	float: left;
+}
+</style>
+</head>
+<body>
+<h2>Hint</h2>
+<p>-add value by adding text in perticular text box and hit enter key to add value<br>
+-remove value by selecting elements and press 'Delete' key</p>
+<div>
+	<input type="text" tabindex='1' id="txt1" placeholder='add value'/><br><br>
+	<select multiple="multiple" id='lstBox1'>
+		<option value="a">a</option>
+		<option value="b">b</option>
+		<option value="c">c</option>
+		<option value="d">d</option>
+	</select>
+</div>
+
+<div>
+	<br><br><Button id="singleRight" value="->">-></Button><br>
+	<Button id="allRight" value="=>">=></Button><br>
+	<Button id="singleLeft" value="<-"><-</Button><br>
+	<Button id="allLeft" value="<="><=</Button><br>
+</div>
+<div>
+	<input type="text" tabindex='2' id="txt2" placeholder='add value'/><br><br>
+	<select multiple="multiple" id='lstBox2'>
+		<option value="w">W</option>
+		<option value="x">X</option>
+		<option value="y">Y</option>
+		<option value="z">Z</option>
+	</select>
+</div>
+<div>
+	<br><br><Button id="moveUp" alt="select" value="^">^</Button><br><br>
+	<Button id="moveDown" value="v">v</Button>
+</div>
+</body>
+</html>
+
+Task: PHP
+work done:
+-Stored Procedure
+-Datatable,simple AJAX ,set a flag when user delete record.
+-on going task given by viresh sir
+Status :on going
+Issues : None
+
+ var str= $('#mygo').html("  "+last);;
+                                                selecteddata=$("#db").val();
+                                                alert(selecteddata);
+                                               var table=$("#table").val();
+
+                                                $.ajax({
+                                                    type: "GET",
+                                                    url:'getdata.php?table='+table+'&database='+selecteddata+'&str='+str,
+                                                    data:table=+table,
+                                                    success:function(table)
+                                                    {
+                                                        $("#final").html(table);
+                                                    }
+                                                });
